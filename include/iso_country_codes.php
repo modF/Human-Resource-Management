@@ -1,5 +1,5 @@
 <?php
-//countries
+
 return array (
     'AF' => "Afghanistan",
     'AX' => "Åland Islands",
