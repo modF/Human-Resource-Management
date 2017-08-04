@@ -1,9 +1,9 @@
 <?php
 //default $this for class hrm_Admin, $tab, $subtab;
-$data = get_option( 'hrm_work_week' );
+$data = get_option('hrm_work_week');
 
 $field['saturday'] = array(
-    'label' => __( 'Saturday', 'hrm' ),
+    'label' => __('Saturday', 'hrm'),
     'type' => 'select',
     'option' => array(
         'full' => 'Full Day',
@@ -11,72 +11,72 @@ $field['saturday'] = array(
         'non' => 'Non-Working Day'
     ),
 
-    'selected' => isset( $data['data']['saturday'] ) ? $data['data']['saturday'] : ''
+    'selected' => isset($data['data']['saturday']) ? $data['data']['saturday'] : ''
 );
 $field['sunday'] = array(
-    'label' => __( 'Sunday', 'hrm' ),
+    'label' => __('Sunday', 'hrm'),
     'type' => 'select',
     'option' => array(
         'full' => 'Full Day',
         'half' => 'Half Day',
         'non' => 'Non-Working Day'
     ),
-    'selected' => isset( $data['data']['sunday'] ) ? $data['data']['sunday'] : ''
+    'selected' => isset($data['data']['sunday']) ? $data['data']['sunday'] : ''
 );
 $field['monday'] = array(
-    'label' => __( 'Monday', 'hrm' ),
+    'label' => __('Monday', 'hrm'),
     'type' => 'select',
     'option' => array(
         'full' => 'Full Day',
         'half' => 'Half Day',
         'non' => 'Non-Working Day'
     ),
-    'selected' => isset( $data['data']['monday'] ) ? $data['data']['monday'] : ''
+    'selected' => isset($data['data']['monday']) ? $data['data']['monday'] : ''
 );
 
 
 $field['tuesday'] = array(
-    'label' => __( 'Tuesday', 'hrm' ),
+    'label' => __('Tuesday', 'hrm'),
     'type' => 'select',
     'option' => array(
         'full' => 'Full Day',
         'half' => 'Half Day',
         'non' => 'Non-Working Day'
     ),
-    'selected' => isset( $data['data']['tuesday'] ) ? $data['data']['tuesday'] : ''
+    'selected' => isset($data['data']['tuesday']) ? $data['data']['tuesday'] : ''
 );
 $field['wednesday'] = array(
-    'label' => __( 'Wednesday', 'hrm' ),
+    'label' => __('Wednesday', 'hrm'),
     'type' => 'select',
     'option' => array(
         'full' => 'Full Day',
         'half' => 'Half Day',
         'non' => 'Non-Working Day'
     ),
-    'selected' => isset( $data['data']['wednesday'] ) ? $data['data']['wednesday'] : ''
+    'selected' => isset($data['data']['wednesday']) ? $data['data']['wednesday'] : ''
 );
 $field['thursday'] = array(
-    'label' => __( 'Thursday', 'hrm' ),
+    'label' => __('Thursday', 'hrm'),
     'type' => 'select',
     'option' => array(
         'full' => 'Full Day',
         'half' => 'Half Day',
         'non' => 'Non-Working Day'
     ),
-    'selected' => isset( $data['data']['thursday'] ) ? $data['data']['thursday'] : ''
+    'selected' => isset($data['data']['thursday']) ? $data['data']['thursday'] : ''
 );
 
 
 
 $field['friday'] = array(
-    'label' => __( 'Friday', 'hrm' ),
+    'label' => __('Friday', 'hrm'),
     'type' => 'select',
     'option' => array(
         'full' => 'Full Day',
         'half' => 'Half Day',
         'non' => 'Non-Working Day'
     ),
-    'selected' => isset( $data['data']['friday'] ) ? $data['data']['friday'] : ''
+    'selected' => isset($data['data']['friday']) ? $data['data']['friday'] : ''
 );
 
 $field['header']       = 'Work Week';
@@ -87,4 +87,4 @@ $field['subtab']       = $subtab;
 $field['page']         = $page;
 $field['submit_btn']   = false;
 
-echo hrm_Settings::getInstance()->visible_form_generator( $field );
+echo hrm_Settings::getInstance()->visible_form_generator($field);

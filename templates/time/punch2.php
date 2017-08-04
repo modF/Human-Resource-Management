@@ -8,7 +8,7 @@ if (file_exists($header_path)) {
 }
 
 if (! hrm_user_can_access($page, $tab, $subtab, 'view')) {
-    printf('<h1>%s</h1>', __('You do not have permission to access this page', 'cpm'));
+    printf('<h1>%s</h1>', __('You do no have permission to access this page', 'cpm'));
     return;
 }
 ?>
@@ -75,7 +75,6 @@ $total_pagination = $query->found_posts;
 
     $add_permission = hrm_user_can_access($page, $tab, $subtab, 'add') ? true : false;
     $delete_permission = hrm_user_can_access($page, $tab, $subtab, 'delete') ? true : false;
-    $edit_permission  = hrm_user_can_access($page, $tab, $subtab, 'edit') ? true : false;
 
     $total_duration = 0;
     foreach ($posts as $key => $post) {
@@ -88,8 +87,8 @@ $total_pagination = $query->found_posts;
             $delete_text  = '';
         }
 
-        if (($add_permission)  && ($edit_permission)) {
-            $name_id = '<div class="hrm-title-wrap"><a href="#edit" class="hrm-time-editable hrm-title"  data-post_id='.$post->ID.'>'.hrm_get_punch_in_time($post->post_date).'</a>
+        if (($add_permission)  && (hrm_user_can_access($page, $tab, $subtab, 'punch_edit', true))) {
+            $name_id = '<div class="hrm-title-wrap"><a href="#" class="hrm-time-editable hrm-title"  data-post_id='.$post->ID.'>'.hrm_get_punch_in_time($post->post_date).'</a>
             <div class="hrm-title-action"><a href="#" class="hrm-time-editable hrm-edit"  data-post_id='.$post->ID.'>'.__('Edit', 'hrm').'</a>'
             .$delete_text. '</div></div>';
         } else {
@@ -98,8 +97,6 @@ $total_pagination = $query->found_posts;
 
         $punch_out_time = get_post_meta($post->ID, '_puch_out_time', true);
         $puch_out_note = get_post_meta($post->ID, '_puch_out_note', true);
-        $punch_in_ip = get_post_meta($post->ID, '_punch_in_ip', true);
-        $punch_out_ip = get_post_meta($post->ID, '_punch_out_ip', true);
 
         if (!empty($punch_out_time)) {
             $total_duration = $total_duration + ($punch_out_time - strtotime($post->post_date));
@@ -118,9 +115,7 @@ $total_pagination = $query->found_posts;
                 $del_checkbox,
                 $name_id,
                 $post->post_content,
-        $punch_in_ip,
                 !empty($punch_out_time) ? hrm_get_punch_in_time($punch_out_time, false) : '',
-        $punch_out_ip,
                 $puch_out_note,
                 isset($duration) ? $duration : '',
             );
@@ -170,18 +165,6 @@ $total_pagination = $query->found_posts;
         )
     );
 
-  $whitelisted=get_user_meta($user_id, 'whitelisted', true);
-  add_action('admin_notices', array($this, ’ip_security_violation’));
-
-    function ip_security_violation()
-    {
-        ?>
-        <div class="error">
-	<?php echo "Security Violation"; ?>
-        </div>
-        <?php
-    }
-
     $query = new WP_Query($arg);
 
     if (!isset($query->posts[0])) {
@@ -197,10 +180,8 @@ $total_pagination = $query->found_posts;
             '<input class="hrm-all-checked" type="checkbox">',
             __('Punch In', 'hrm'),
             __('Punch In Note', 'hrm'),
-    __('Punch in IP', 'hrm)'),
             __('Punch Out', 'hrm'),
             __('Punch Out Note', 'hrm'),
-    __('Punch Out IP', 'hrm'),
             __('Duration (Hours)', 'hrm'),
         );
     } else {

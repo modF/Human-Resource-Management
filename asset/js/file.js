@@ -139,4 +139,3 @@ jQuery(function($) {
 
     hrm_file_ajax.init();
 });
-
